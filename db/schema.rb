@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_11_210056) do
+ActiveRecord::Schema.define(version: 2020_11_11_225921) do
 
   create_table "cards", force: :cascade do |t|
-    t.decimal "price"
+    t.float "price"
     t.integer "quantity"
     t.string "brand"
     t.integer "player_id", null: false
