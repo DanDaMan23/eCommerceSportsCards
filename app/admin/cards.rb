@@ -5,7 +5,7 @@ ActiveAdmin.register Card do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :price, :quantity, :brand, :player_id, :team_id
+  permit_params :price, :quantity, :brand, :player_id, :team_id, :image
   #
   # or
   #
