@@ -5,7 +5,7 @@ ActiveAdmin.register Team do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :city
+  permit_params :name, :city
   #
   # or
   #
@@ -14,5 +14,5 @@ ActiveAdmin.register Team do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
 end
