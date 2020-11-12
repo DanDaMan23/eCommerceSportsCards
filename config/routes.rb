@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'posts/index'
+  get 'posts/show'
   get 'cards/index'
   get 'cards/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
