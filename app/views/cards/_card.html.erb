@@ -1,0 +1,9 @@
+<div class="card col-4" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="No Image">
+  <div class="card-body">
+    <h5 class="card-title"><%= card.player.name %></h5>
+    <p><strong>Team</strong>: <%= card.team.city %> <%= card.team.name %></p>
+    <p><strong>Price</strong>: $<%= card.price %></p>
+    <%= link_to "Details", card, class: "btn btn-primary"%>
+  </div>
+</div>

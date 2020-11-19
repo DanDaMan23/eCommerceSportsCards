@@ -1,2 +1,13 @@
-<h1>Cards#index</h1>
-<p>Find me in app/views/cards/index.html.erb</p>
+<h1>Sports Cards</h1>
+
+<% if @cards.empty? %>
+    <p>There are no posts</p>
+<% else %>
+    <div class="row">
+        <% @cards.each do |card| %>
+            <%= render partial: 'card', locals: { card: card } %>
+        <% end %>
+    </div>
+
+
+<% end %>

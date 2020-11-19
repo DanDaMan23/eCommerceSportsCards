@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  get 'posts/index'
-  get 'posts/show'
-  get 'cards/index'
-  get 'cards/show'
+  root to: 'posts#index'
+  # get 'posts/show'
+
+  resources "posts", only: %i[index show]
+  resources "cards", only: %i[index show]
+
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
