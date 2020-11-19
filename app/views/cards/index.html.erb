@@ -1,7 +1,12 @@
 <h1>Sports Cards</h1>
 
+<%= form_tag(cards_path, method: :get) do %>
+    <%= text_field_tag(:search, params[:search] ) %>
+    <%= submit_tag("Submit") %>
+<% end %>
+
 <% if @cards.empty? %>
-    <p>There are no posts</p>
+    <p>There are no cards</p>
 <% else %>
     <div class="row">
         <% @cards.each do |card| %>
@@ -9,5 +14,8 @@
         <% end %>
     </div>
 
+    <div class="d-flex justify-content-center mt-5">
+        <%= paginate @cards %>
+    </div>
 
 <% end %>
