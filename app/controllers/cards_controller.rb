@@ -1,7 +1,8 @@
 class CardsController < ApplicationController
   def index
     if params[:search]
-      @cards = Card.where("brand LIKE '%#{params[:search]}%'").page(params[:page])
+      # @cards = Card.where("brand LIKE '#{params[:search]}%'").page(params[:page])
+      @cards = Card.joins(:player).where("name LIKE '#{params[:search]}%'").page(params[:page])
     else
       @cards = Card.all.page(params[:page])
     end

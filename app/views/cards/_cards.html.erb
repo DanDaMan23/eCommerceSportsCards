@@ -1,0 +1,14 @@
+<% if cards.empty? %>
+    <p>There are no cards</p>
+<% else %>
+    <div class="row">
+        <% cards.each do |card| %>
+            <%= render partial: 'card', locals: { card: card } %>
+        <% end %>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <%= paginate cards %>
+    </div>
+
+<% end %>
