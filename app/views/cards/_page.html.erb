@@ -4,9 +4,19 @@
         <%= form_tag(page_path, method: :get, class: "mb-3") do %>
             <h5 class="text-dark">Search</h5>
             <%= text_field_tag(:search, params[:search] ) %>
+            <br />
+            <h5 class="text-dark">Team</h5>
+            <%= select_tag(:choice, options_for_select(@teams.collect do |team|
+                ["#{team.city} #{team.name}", team.id]
+                end) )
+            %>
+
+
+
+            <br />
+            <br />
             <%= submit_tag("Submit") %>
         <% end %>
-
         <div>
             <ul class="nav flex-column">
                 <li class="nav-item">
