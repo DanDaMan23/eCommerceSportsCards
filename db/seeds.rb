@@ -46,8 +46,8 @@ puts "Players created: #{Player.count}"
 puts "Teams created #{Team.count}"
 puts "Cards created: #{Card.count}"
 
-# if Rails.env.development?
-#   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
-# end
+if Rails.env.development?
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+end
 
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

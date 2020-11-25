@@ -2,6 +2,13 @@
   <%# <img src="..." class="card-img-top" alt="No Image"> %>
   <%# Ask Kyle how to check if an image is stored %>
 
+  <% if (card.image.present?) %>
+    <%= image_tag(card.image) %>
+  <% else %>
+    <div>
+    </div>
+  <% end %>
+
   <div class="card-body">
     <h5 class="card-title"><%= card.player.name %></h5>
     <p><strong>Team</strong>: <%= card.team.city %> <%= card.team.name %></p>
