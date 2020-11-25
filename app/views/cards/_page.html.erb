@@ -6,12 +6,12 @@
             <%= text_field_tag(:search, params[:search] ) %>
             <br />
             <h5 class="text-dark">Team</h5>
-            <%= select_tag(:choice, options_for_select(@teams.collect do |team|
+            <%# <%= select_tag(:choice, options_for_select(@teams.collect do |team|
                 ["#{team.city} #{team.name}", team.id]
                 end) )
-            %>
+            %> %>
 
-
+            <%= select_tag(:choice, options_from_collection_for_select(@teams, "id", "name"), prompt: "Select a team") %>
 
             <br />
             <br />
