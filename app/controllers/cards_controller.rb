@@ -54,16 +54,19 @@ class CardsController < ApplicationController
 
   def add_to_cart
     id = params[:id].to_i
-    session[:cart] << id unless session[:cart].include?(id)
+    quantity = params[:quantity].to_i
+    item = {id: id, quantity: quantity}
+    session[:cart] << item unless session[:cart].include?(item[:id])
     redirect_to cards_path
   end
 
   def remove_from_cart
     id = params[:id].to_i
-    session[:cart].delete(id)
+    # item_to_delete = session[:cart].select {|i| i["id"] == id}
+    # session[:cart].delete(item_to_delete)
+    session[:cart] = session[:cart].select {|i| i["id"] != id}
     redirect_to cards_path
   end
-
 
   private
   def initialize_session
@@ -71,7 +74,13 @@ class CardsController < ApplicationController
   end
 
   def load_cart
-    @cart = Card.find(session[:cart])
+    ids = []
+
+    session[:cart].each do |i|
+      ids << i["id"]
+    end
+
+    @cart = Card.find(ids)
   end
 
 
