@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
 
   post 'cards/add_to_cart/:id', to: 'cards#add_to_cart', as: "add_to_cart"
+  post 'cards/edit_cart_item/:id', to: 'cards#edit_cart_item', as: "edit_cart_item"
   delete 'cards/remove_from_cart/:id', to: 'cards#remove_from_cart', as: "remove_from_cart"
 
   devise_for :admin_users, ActiveAdmin::Devise.config

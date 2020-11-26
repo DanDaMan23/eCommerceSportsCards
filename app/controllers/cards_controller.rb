@@ -68,6 +68,13 @@ class CardsController < ApplicationController
     redirect_to cards_path
   end
 
+  def edit_cart_item
+    id = params[:id].to_i
+    item = session[:cart].select {|i| i["id"] == id}[0]
+    item["quantity"] = params[:quantity]
+    redirect_to cards_path
+  end
+
   private
   def initialize_session
     session[:cart] ||= []
@@ -81,6 +88,7 @@ class CardsController < ApplicationController
     end
 
     @cart = Card.find(ids)
+    @session_cart = session[:cart]
   end
 
 
