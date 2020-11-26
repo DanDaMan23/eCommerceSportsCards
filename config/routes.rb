@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :customers
   root to: 'posts#index'
   # get 'posts/show'
 
