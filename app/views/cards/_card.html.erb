@@ -16,10 +16,10 @@
     <%= link_to "Details", card, class: "btn btn-primary" %>
 
     <% if @cart.include?(card) %>
-      <button type="button" class="btn btn-secondary" disabled>Add to cart</button>
-
+      <%# <button type="button" class="btn btn-secondary" disabled>Add to cart</button> %>
+      <%= link_to 'Remove Item', remove_from_cart_path(card), method: :delete, class: "btn btn-secondary" %>
     <% else %>
-      <%= link_to "Add to cart", add_to_cart_path(card.id), method: :post, class: "btn btn-primary" %>
+      <%= link_to "Add Item", add_to_cart_path(card.id), method: :post, class: "btn btn-primary" %>
     <% end %>
 
 

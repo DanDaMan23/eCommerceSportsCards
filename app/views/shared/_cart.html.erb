@@ -15,11 +15,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <ul class="list-group">
-                    <% cart.each do |item| %>
-                        <li class="list-group-item"><%= item.player.name %></li>
-                    <% end %>
-                </ul>
+                <% if cart.empty? %>
+                    <p>No items in cart</p>
+                <% else %>
+                    <ul class="list-group">
+                        <% cart.each do |item| %>
+                            <li class="list-group-item"><%= item.player.name %></li>
+                        <% end %>
+                    </ul>
+                <% end %>
+
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
