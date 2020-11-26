@@ -1,4 +1,6 @@
 class CardsController < ApplicationController
+  before_action :initialize_session
+  before_action :load_cart
 
   def index
     @teams = Team.all().order(:name)
@@ -33,11 +35,11 @@ class CardsController < ApplicationController
   def updated_cards
     @teams = Team.all().order(:name)
     if params[:search]
-
       search_key = "players.name LIKE ? AND cards.updated_at > ? AND cards.updated_at <> cards.created_at", "#{params[:search]}%", Date.today - 3
 
       if params[:choice] != ""
-        search_key = "players.name LIKE ? AND teams.id = ? AND cards.updated_at > ? AND cards.updated_at <> cards.created_at", "#{params[:search]}%", params[:choice], Date.today - 3
+        search_key = "players.name LIKE ? AND teams.id = ? AND cards.updated_at > ? AND cards.updated_at <> cards.created_at",
+        "#{params[:search]}%", params[:choice], Date.today - 3
       end
 
       @cards = Card.joins(:player, :team).where(search_key).page(params[:page])
@@ -49,5 +51,23 @@ class CardsController < ApplicationController
   def show
     @card = Card.find(params[:id])
   end
+
+  def add_to_cart
+    id = params[:id].to_i
+
+    session[:cart] << id unless session[:cart].include?(id)
+    redirect_to cards_path
+  end
+
+
+  private
+  def initialize_session
+    session[:cart] ||= []
+  end
+
+  def load_cart
+    @cart = Card.find(session[:cart])
+  end
+
 
 end

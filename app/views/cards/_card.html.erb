@@ -13,6 +13,15 @@
     <h5 class="card-title"><%= card.player.name %></h5>
     <p><strong>Team</strong>: <%= card.team.city %> <%= card.team.name %></p>
     <p><strong>Price</strong>: $<%= card.price %></p>
-    <%= link_to "Details", card, class: "btn btn-primary"%>
+    <%= link_to "Details", card, class: "btn btn-primary" %>
+
+    <% if @cart.include?(card) %>
+      <button type="button" class="btn btn-secondary" disabled>Add to cart</button>
+
+    <% else %>
+      <%= link_to "Add to cart", add_to_cart_path(card.id), method: :post, class: "btn btn-primary" %>
+    <% end %>
+
+
   </div>
 </div>

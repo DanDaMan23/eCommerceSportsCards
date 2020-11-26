@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   get 'new_cards', to: 'cards#new_cards', as: "new_cards"
   get 'updated_cards', to: 'cards#updated_cards', as: "updated_cards"
 
+
+  post 'cards/add_to_cart/:id', to: 'cards#add_to_cart', as: "add_to_cart"
+  delete 'cards/remove_from_cart/:id', to: 'cards#remove_from_cart', as: "remove_from_cart"
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
