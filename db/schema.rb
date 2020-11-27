@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_26_220903) do
+ActiveRecord::Schema.define(version: 2020_11_27_054455) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -81,11 +81,12 @@ ActiveRecord::Schema.define(version: 2020_11_26_220903) do
     t.string "last_name"
     t.string "address"
     t.string "city"
-    t.string "province"
     t.string "country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "province_id"
     t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["province_id"], name: "index_customers_on_province_id"
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
@@ -102,6 +103,15 @@ ActiveRecord::Schema.define(version: 2020_11_26_220903) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.float "gst"
+    t.float "pst"
+    t.float "hst"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.string "city"
@@ -112,4 +122,5 @@ ActiveRecord::Schema.define(version: 2020_11_26_220903) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cards", "players"
   add_foreign_key "cards", "teams"
+  add_foreign_key "customers", "provinces"
 end

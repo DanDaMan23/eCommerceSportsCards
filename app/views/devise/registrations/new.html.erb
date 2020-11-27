@@ -43,7 +43,7 @@
 
   <div class="field">
     <%= f.label :province %><br />
-    <%= f.text_field :province %>
+    <%= f.select :province, options_for_select(Province.all.collect { |x| [x.name, Province.find(x.id)] }) %>
   </div>
 
   <div class="field">
