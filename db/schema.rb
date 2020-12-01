@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_01_065753) do
+ActiveRecord::Schema.define(version: 2020_12_01_081718) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 2020_12_01_065753) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "card_orders", force: :cascade do |t|
+    t.integer "card_id", null: false
+    t.integer "order_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_card_orders_on_card_id"
+    t.index ["order_id"], name: "index_card_orders_on_order_id"
   end
 
   create_table "cards", force: :cascade do |t|
@@ -133,6 +143,8 @@ ActiveRecord::Schema.define(version: 2020_12_01_065753) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "card_orders", "cards"
+  add_foreign_key "card_orders", "orders"
   add_foreign_key "cards", "players"
   add_foreign_key "cards", "teams"
   add_foreign_key "customers", "provinces"
