@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_27_053751) do
+ActiveRecord::Schema.define(version: 2020_12_01_065753) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -84,8 +84,23 @@ ActiveRecord::Schema.define(version: 2020_11_27_053751) do
     t.string "country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "province_id"
     t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["province_id"], name: "index_customers_on_province_id"
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "status"
+    t.float "sub_total"
+    t.float "gst"
+    t.float "pst"
+    t.float "hst"
+    t.float "total"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -120,4 +135,6 @@ ActiveRecord::Schema.define(version: 2020_11_27_053751) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cards", "players"
   add_foreign_key "cards", "teams"
+  add_foreign_key "customers", "provinces"
+  add_foreign_key "orders", "customers"
 end

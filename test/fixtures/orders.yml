@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer: one
+  status: MyString
+  sub_total: 1.5
+  gst: 1.5
+  pst: 1.5
+  hst: 1.5
+  total: 1.5
+
+two:
+  customer: two
+  status: MyString
+  sub_total: 1.5
+  gst: 1.5
+  pst: 1.5
+  hst: 1.5
+  total: 1.5
