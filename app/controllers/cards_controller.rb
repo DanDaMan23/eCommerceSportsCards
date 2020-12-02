@@ -119,11 +119,6 @@ class CardsController < ApplicationController
     load_cart
   end
 
-  def purchase
-
-    redirect_to root_path
-  end
-
   private
   def initialize_session
     session[:cart] ||= []
@@ -145,12 +140,7 @@ class CardsController < ApplicationController
   end
 
   def create_order(customer, sub_total, gst, pst, hst, total)
-    Order.create(customer: customer, sub_total: sub_total, gst: gst, pst: pst, hst: hst, total: total)
+    Order.create(customer: customer, status: "paid", sub_total: sub_total, gst: gst, pst: pst, hst: hst, total: total)
   end
-
-  def finalize_order
-
-  end
-
 
 end
