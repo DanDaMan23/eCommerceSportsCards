@@ -1,8 +1,8 @@
 <h1>Checkout</h1>
 
-<ul>
+<ul class="list-group">
     <% session[:cart].each do |item| %>
-        <li>
+        <li class="list-group-item">
             Card: <%= Card.find(item["id"]).player.name %> <br />
             Team: <%= Card.find(item["id"]).team.name %> <br />
             Quantity: <%= item["quantity"] %> <br />
@@ -12,6 +12,6 @@
 
 </ul>
 
-<p>Total: $<%= @total %></p>
+<h3>Total: $<%= @total %></h3>
 
 <%= link_to "Place Order", place_order_path %>

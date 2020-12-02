@@ -1,4 +1,4 @@
 <h1>Order Placed</h1>
 
-<h3>Sub Total: <%= @sub_total %></h3>
-<p>Total: $<%= @total %></p>
+<% props = jbuild_props('shared/order.json.jbuilder', order: Order.last) %>
+<%= react_component("Order", props) %>

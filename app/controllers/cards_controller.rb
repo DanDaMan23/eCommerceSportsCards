@@ -116,6 +116,7 @@ class CardsController < ApplicationController
     end
 
     session[:cart] = []
+    session[:cart] ||= []
     load_cart
   end
 

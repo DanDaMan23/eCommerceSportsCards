@@ -1,0 +1,1 @@
+json.extract! order, :id, :customer_id, :status, :sub_total, :gst, :pst, :hst, :total
