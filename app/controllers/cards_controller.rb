@@ -75,6 +75,55 @@ class CardsController < ApplicationController
     redirect_to cards_path
   end
 
+  def checkout
+    @sub_total = 0
+
+    session[:cart].each do |item|
+      quantity = item["quantity"].to_i
+      price = Card.find(item["id"]).price
+      @sub_total += price * quantity
+    end
+
+    @gst = current_customer.province.gst * @sub_total
+    @pst = current_customer.province.pst * @sub_total
+    @hst = current_customer.province.hst * @sub_total
+
+    @total = @sub_total + @gst + @pst + @hst
+
+  end
+
+  def place_order
+    @sub_total = 0
+
+    session[:cart].each do |item|
+      quantity = item["quantity"].to_i
+      price = Card.find(item["id"]).price
+      @sub_total += price * quantity
+    end
+
+    @gst = current_customer.province.gst * @sub_total
+    @pst = current_customer.province.pst * @sub_total
+    @hst = current_customer.province.hst * @sub_total
+
+    @total = @sub_total + @gst + @pst + @hst
+
+    order = create_order(current_customer, @sub_total, @gst, @pst, @hst, @total)
+
+    session[:cart].each do |item|
+      card = Card.find(item["id"])
+      quantity = item["quantity"]
+      card_order = create_card_order(card, order, quantity)
+    end
+
+    session[:cart] = []
+    load_cart
+  end
+
+  def purchase
+
+    redirect_to root_path
+  end
+
   private
   def initialize_session
     session[:cart] ||= []
@@ -89,6 +138,18 @@ class CardsController < ApplicationController
 
     @cart = Card.find(ids)
     @session_cart = session[:cart]
+  end
+
+  def create_card_order(card, order, quantity)
+    CardOrder.create(card: card, order: order, quantity: quantity)
+  end
+
+  def create_order(customer, sub_total, gst, pst, hst, total)
+    Order.create(customer: customer, sub_total: sub_total, gst: gst, pst: pst, hst: hst, total: total)
+  end
+
+  def finalize_order
+
   end
 
 
