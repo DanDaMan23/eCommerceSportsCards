@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_12_074652) do
+ActiveRecord::Schema.define(version: 2020_12_01_081718) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(version: 2020_11_12_074652) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "card_orders", force: :cascade do |t|
+    t.integer "card_id", null: false
+    t.integer "order_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_card_orders_on_card_id"
+    t.index ["order_id"], name: "index_card_orders_on_order_id"
+  end
+
   create_table "cards", force: :cascade do |t|
     t.float "price"
     t.integer "quantity"
@@ -69,6 +79,38 @@ ActiveRecord::Schema.define(version: 2020_11_12_074652) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["player_id"], name: "index_cards_on_player_id"
     t.index ["team_id"], name: "index_cards_on_team_id"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.string "country"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "province_id"
+    t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["province_id"], name: "index_customers_on_province_id"
+    t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "status"
+    t.float "sub_total"
+    t.float "gst"
+    t.float "pst"
+    t.float "hst"
+    t.float "total"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -84,6 +126,15 @@ ActiveRecord::Schema.define(version: 2020_11_12_074652) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.float "gst"
+    t.float "pst"
+    t.float "hst"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.string "city"
@@ -92,6 +143,10 @@ ActiveRecord::Schema.define(version: 2020_11_12_074652) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "card_orders", "cards"
+  add_foreign_key "card_orders", "orders"
   add_foreign_key "cards", "players"
   add_foreign_key "cards", "teams"
+  add_foreign_key "customers", "provinces"
+  add_foreign_key "orders", "customers"
 end

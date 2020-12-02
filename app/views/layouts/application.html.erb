@@ -26,19 +26,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <%# <a class="nav-link" href="#">About Us</a> %>
             <%= link_to "Home", root_path, class: "nav-link"%>
             <%= link_to "Sports Cards", cards_path, class: "nav-link"%>
-            <a class="nav-link" href="#">Mystery Package</a>
+            <a class="nav-link disabled" href="#">Mystery Package</a>
           </div>
         </div>
       </div>
     </nav>
 
+
+
     <div class="container-md mt-3">
       <%= yield %>
     </div>
-
 
   </body>
 </html>

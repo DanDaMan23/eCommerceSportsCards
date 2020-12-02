@@ -6,6 +6,7 @@
     <%= image_tag(card.image) %>
   <% else %>
     <div>
+      <p>No image for this product</p>
     </div>
   <% end %>
 
@@ -13,6 +14,18 @@
     <h5 class="card-title"><%= card.player.name %></h5>
     <p><strong>Team</strong>: <%= card.team.city %> <%= card.team.name %></p>
     <p><strong>Price</strong>: $<%= card.price %></p>
-    <%= link_to "Details", card, class: "btn btn-primary"%>
+
+    <%= link_to "Details", card, class: "btn btn-primary" %>
+
+    <% if @cart.include?(card) %>
+      <%= link_to 'Remove Item', remove_from_cart_path(card), method: :delete, class: "btn btn-danger" %>
+    <% else %>
+      <%= form_tag(add_to_cart_path(card.id)) do %>
+        <%= number_field_tag(:quantity, value=1, min: 1, max: card.quantity) %>
+        <%= submit_tag("Add To Cart", class: "btn btn-primary") %>
+      <% end %>
+    <% end %>
+
+
   </div>
 </div>

@@ -1,0 +1,17 @@
+<h1>Checkout</h1>
+
+<ul>
+    <% session[:cart].each do |item| %>
+        <li>
+            Card: <%= Card.find(item["id"]).player.name %> <br />
+            Team: <%= Card.find(item["id"]).team.name %> <br />
+            Quantity: <%= item["quantity"] %> <br />
+            Price: $<%= Card.find(item["id"]).price %> <br />
+        </li>
+    <% end %>
+
+</ul>
+
+<p>Total: $<%= @total %></p>
+
+<%= link_to "Place Order", place_order_path %>

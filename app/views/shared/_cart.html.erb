@@ -1,0 +1,54 @@
+<div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+        &#128722;
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Shopping Cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <% if cart.empty? %>
+                    <p>No items in cart</p>
+                <% else %>
+                    <ul class="list-group">
+                        <% cart.each do |item| %>
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <%= item.player.name %>
+                                    <div>
+                                        <%= form_tag(edit_cart_item_path(item.id)) do %>
+                                            <%= number_field_tag(:quantity, value=@session_cart.select {|i| i["id"] == item.id}[0]["quantity"], min: 1, max: item.quantity) %>
+                                            <%= submit_tag("Update", class: "btn btn-primary") %>
+                                        <% end %>
+                                    </div>
+                                    <%= link_to 'Remove Item', remove_from_cart_path(item), method: :delete, class: "btn btn-danger" %>
+                                </div>
+                            </li>
+                        <% end %>
+                    </ul>
+                <% end %>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                <% if current_customer && !@cart.empty? %>
+                    <%# <button type="button" class="btn btn-primary">Checkout</button> %>
+                    <%= link_to 'Checkout', checkout_path, class: "btn btn-primary" %>
+                <% else %>
+                    <button type="button" class="btn btn-primary" disabled>Checkout</button>
+                <% end %>
+
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

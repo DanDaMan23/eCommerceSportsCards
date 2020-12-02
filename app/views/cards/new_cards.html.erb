@@ -1,1 +1,3 @@
+<%= render partial: 'shared/login_logout'%>
+<%= render partial: 'shared/cart', locals: {cart: @cart} %>
 <%= render partial: 'page', locals: {page_path: new_cards_path, title: "New Cards"} %>
