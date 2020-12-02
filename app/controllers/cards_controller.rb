@@ -112,7 +112,7 @@ class CardsController < ApplicationController
     session[:cart].each do |item|
       card = Card.find(item["id"])
       quantity = item["quantity"]
-      card_order = create_card_order(card, order, quantity)
+      create_card_order(card, order, quantity)
     end
 
     session[:cart] = []
