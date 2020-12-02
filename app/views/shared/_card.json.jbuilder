@@ -1,0 +1,1 @@
+json.extract! card, :id, :price, :quantity, :brand, :player_id, :team_id

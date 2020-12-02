@@ -1,5 +1,8 @@
-<%= render partial: 'shared/login_logout'%>
-<%= render partial: 'shared/cart', locals: {cart: @cart} %>
+<% props = jbuild_props('shared/card.json.jbuilder', card: @card) %>
+<%= react_component "Card", props %>
+
+
+
 <div class="card" style="width: 18rem;">
   <img src="..." class="card-img-top" alt="No Image">
   <div class="card-body">
